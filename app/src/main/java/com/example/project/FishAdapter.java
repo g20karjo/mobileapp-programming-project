@@ -26,7 +26,7 @@ public class FishAdapter extends RecyclerView.Adapter<FishAdapter.FishAdapterVie
 
     @Override
     public void onBindViewHolder(@NonNull FishAdapterViewHolder holder, int position) {
-        holder.fish_name.setText(Fish.get(position).getName());
+        holder.fishName.setText(Fish.get(position).getName());
     }
 
     @Override
@@ -35,12 +35,11 @@ public class FishAdapter extends RecyclerView.Adapter<FishAdapter.FishAdapterVie
     }
 
     public class FishAdapterViewHolder extends RecyclerView.ViewHolder {
-        private TextView fish_name;
+        private TextView fishName;
 
         public FishAdapterViewHolder(@NonNull View itemView) {
             super(itemView);
-            fish_name = itemView.findViewById(R.id.fishName);
+            fishName = itemView.findViewById(R.id.fishName);
         }
-
     }
 }

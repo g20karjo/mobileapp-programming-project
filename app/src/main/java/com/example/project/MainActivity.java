@@ -12,36 +12,37 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class MainActivity extends AppCompatActivity implements JsonTask.JsonTaskListener {
 
     private RecyclerView recyclerView;
-    private FishAdapter fishAdapter;
-    private List<Fish> listOfFish;
+    private List<Fish> Fish = new ArrayList<>();
+    private FishAdapter fishAdapter = new FishAdapter(Fish);
+
+    private final String JSON_URL = "https://mobprog.webug.se/json-api?login=brom";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        recyclerView = findViewById(R.id.recyclerView);
-
-        recyclerView.setAdapter(fishAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        recyclerView=findViewById(R.id.recyclerView);
+        recyclerView.setAdapter(fishAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        new JsonTask(this).execute(JSON_URL);
     }
 
-    public void onPostExecute(String Json) {
+    public void onPostExecute(String json) {
         Log.d("MainActivity", json);
         Gson gson = new Gson();
         Type type = new TypeToken<List<Fish>>() {}.getType();
-        listOfFish= gson.fromJson(json, type);
-        fishAdapter = new FishAdapter(listOfFish);
-        recyclerView.setAdapter(fishAdapter);
+        Fish = gson.fromJson(json, type);
         recyclerView=findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        recyclerView.setAdapter(fishAdapter);
     }
 }
