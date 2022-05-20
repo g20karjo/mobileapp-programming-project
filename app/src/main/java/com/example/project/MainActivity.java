@@ -19,8 +19,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements JsonTask.JsonTaskListener {
 
     private RecyclerView recyclerView;
-    private List<Fish> Fish = new ArrayList<>();
-    private FishAdapter fishAdapter = new FishAdapter(Fish);
+    private List<Fish> Fish;
+    private FishAdapter fishAdapter;
 
     private final String JSON_URL = "https://mobprog.webug.se/json-api?login=brom";
 
@@ -32,8 +32,7 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         setSupportActionBar(toolbar);
 
         recyclerView=findViewById(R.id.recyclerView);
-        recyclerView.setAdapter(fishAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
         new JsonTask(this).execute(JSON_URL);
     }
 
@@ -42,7 +41,10 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         Gson gson = new Gson();
         Type type = new TypeToken<List<Fish>>() {}.getType();
         Fish = gson.fromJson(json, type);
+        fishAdapter = new FishAdapter(Fish);
         recyclerView=findViewById(R.id.recyclerView);
         recyclerView.setAdapter(fishAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
     }
 }
