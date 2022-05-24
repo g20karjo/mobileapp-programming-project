@@ -20,7 +20,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="app for fishermen in the north"
+        android:text="app for fishermen in the north, designed with the intention of getting fishermen the required knowledge to know what fish they catched."
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title"
         app:layout_constraintEnd_toEndOf="parent"/>

@@ -15,10 +15,14 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class FishAdapter extends RecyclerView.Adapter<FishAdapter.FishAdapterViewHolder>{
-    private List<Fish> Fish;
+    private List<Fish> fish;
 
-    public FishAdapter(List<Fish> Fish) {
-        this.Fish = Fish;
+    public FishAdapter(List<Fish> fish) {
+        this.fish = fish;
+    }
+
+    public void setFish(List<Fish> fish) {
+        this.fish = fish;
     }
 
     @NonNull
@@ -30,16 +34,16 @@ public class FishAdapter extends RecyclerView.Adapter<FishAdapter.FishAdapterVie
 
     @Override
     public void onBindViewHolder(@NonNull FishAdapterViewHolder holder, int position) {
-        holder.fishName.setText(Fish.get(position).getName());
-        holder.fishSize.setText(String.valueOf(Fish.get(position).getSize())+"cm");
-        holder.fishID.setText(Fish.get(position).getID());
-        Picasso.get().load(Fish.get(position).getImg().toString()).into(holder.fishImg);
+        holder.fishName.setText(fish.get(position).getName());
+        holder.fishSize.setText(String.valueOf(fish.get(position).getSize())+"cm");
+        holder.fishID.setText(fish.get(position).getID());
+        Picasso.get().load(fish.get(position).getImg().toString()).into(holder.fishImg);
 
     }
 
     @Override
     public int getItemCount() {
-        return Fish.size();
+        return fish.size();
     }
 
     public class FishAdapterViewHolder extends RecyclerView.ViewHolder {

@@ -22,7 +22,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements JsonTask.JsonTaskListener {
 
     private RecyclerView recyclerView;
-    private List<Fish> Fish;
+    private List<Fish> fish = new ArrayList<>();
     private FishAdapter fishAdapter;
     private Button aboutButton;
     private final String JSON_URL = "https://mobprog.webug.se/json-api?login=g20karjo";
@@ -34,7 +34,10 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        new JsonTask(this).execute(JSON_URL);
+        fishAdapter = new FishAdapter(fish);
+        recyclerView=findViewById(R.id.recyclerView);
+        recyclerView.setAdapter(fishAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
         aboutButton = findViewById(R.id.aboutButton);
         aboutButton.setOnClickListener(new View.OnClickListener() {
@@ -43,18 +46,19 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
                 Intent intent = new Intent(MainActivity.this, SecondActivity.class);
                 startActivity(intent);
             }
+
         });
+        new JsonTask(this).execute(JSON_URL);
     }
 
     public void onPostExecute(String json) {
         Log.d("MainActivity", json);
         Gson gson = new Gson();
         Type type = new TypeToken<List<Fish>>() {}.getType();
-        Fish = gson.fromJson(json, type);
-        fishAdapter = new FishAdapter(Fish);
-        recyclerView=findViewById(R.id.recyclerView);
-        recyclerView.setAdapter(fishAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        fish = gson.fromJson(json, type);
+        fishAdapter.setFish(fish);
+        fishAdapter.notifyDataSetChanged();
+
 
     }
 }
