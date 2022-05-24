@@ -34,9 +34,8 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        recyclerView=findViewById(R.id.recyclerView);
-
         new JsonTask(this).execute(JSON_URL);
+
         aboutButton = findViewById(R.id.aboutButton);
         aboutButton.setOnClickListener(new View.OnClickListener() {
             @Override
