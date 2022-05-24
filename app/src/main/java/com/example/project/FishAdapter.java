@@ -31,9 +31,11 @@ public class FishAdapter extends RecyclerView.Adapter<FishAdapter.FishAdapterVie
     @Override
     public void onBindViewHolder(@NonNull FishAdapterViewHolder holder, int position) {
         holder.fishName.setText(Fish.get(position).getName());
-        holder.fishSize.setText(String.valueOf(Fish.get(position).getSize())+"m");
+        holder.fishSize.setText(String.valueOf(Fish.get(position).getSize())+"cm");
         holder.fishID.setText(Fish.get(position).getID());
-        Picasso.get().load(""+Fish.get(position).getImg()).into(holder.fishImg);
+        if(Fish.get(position).getImg()!=null) {
+            Picasso.get().load(Fish.get(position).getImg()).into(holder.fishImg);
+        }
     }
 
     @Override

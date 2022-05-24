@@ -24,6 +24,7 @@ public class Fish {
     public String getID() {
         return ID;
     }
+
     public String getImg() {
         return img;
     }
