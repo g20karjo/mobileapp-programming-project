@@ -33,9 +33,8 @@ public class FishAdapter extends RecyclerView.Adapter<FishAdapter.FishAdapterVie
         holder.fishName.setText(Fish.get(position).getName());
         holder.fishSize.setText(String.valueOf(Fish.get(position).getSize())+"cm");
         holder.fishID.setText(Fish.get(position).getID());
-        if(Fish.get(position).getImg()!=null) {
-            Picasso.get().load(Fish.get(position).getImg()).into(holder.fishImg);
-        }
+        Picasso.get().load(Fish.get(position).getImg().toString()).into(holder.fishImg);
+
     }
 
     @Override

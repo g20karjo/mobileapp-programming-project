@@ -1,16 +1,16 @@
 package com.example.project;
 
 public class Fish {
-    String img;
+    String auxdata;
     int size;
     String name;
     String ID;
 
-    public Fish(String name, String ID, int size, String img){
+    public Fish(String name, String ID, int size, String auxdata){
         this.name = name;
         this.size = size;
         this.ID = ID;
-        this.img = img;
+        this.auxdata = auxdata;
     }
 
     public String getName() {
@@ -26,6 +26,6 @@ public class Fish {
     }
 
     public String getImg() {
-        return img;
+        return auxdata;
     }
 }
